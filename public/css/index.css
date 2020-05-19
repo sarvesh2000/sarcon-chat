@@ -1,0 +1,203 @@
+.auditorium-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
+    url("../assets/auditorium1.jpg");
+}
+
+.lobby-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)),
+    url("../assets/c1.jpg");
+}
+
+.ai-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
+    url("../assets/c2.jpg");
+}
+
+.prize-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
+    url("../assets/c3.jpg");
+}
+
+.lounge-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
+    url("../assets/c4.jpg");
+}
+
+.swag-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)),
+    url("../assets/c5.jpg");
+}
+
+.info-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)),
+    url("../assets/c6.jpg");
+}
+
+.resources-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)),
+    url("../assets/c7.jpg");
+}
+
+.chat-jumbotron {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)),
+    url("../assets/c3.jpg");
+}
+
+.jumbotron {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 800px;
+}
+
+.auditorium-content h1 {
+  margin-top: 20%;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 3.5rem;
+}
+
+.auditorium-content p {
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.auditorium-btn,
+.chat-btn {
+  color: #fff !;
+  background-color: #f23a2e;
+  border-color: #f23a2e;
+  align-items: center;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.mdl-tabs__tab-bar {
+  height: 70px;
+  text-align: center;
+  background: #c82e33;
+  color: white !important;
+}
+
+.mdl-tabs__tab {
+  margin: 1% auto;
+  color: white !important;
+  text-transform: none !important;
+}
+
+.mdl-tabs__tab:hover {
+  color: #c82e33 !important;
+  background-color: white;
+}
+
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
+  background-color: white !important;
+}
+
+.mdl-tabs__tab>.icon {
+  padding-top: 10px;
+}
+
+
+.custom_navigation_span>span {
+  position: relative;
+  bottom: 4px;
+}
+
+/* agenda or view session css */
+
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+
+.done {
+  display: none;
+}
+
+.title {
+  margin-top: 2%;
+  font-weight: 900;
+  font-family: sans-serif;
+  font-size: 42px;
+}
+
+.alert {
+  background: #DE3438 !important;
+  color: white !important;
+  margin-bottom: 0 !important;
+}
+
+ul {
+  line-height: 16px !important;
+}
+
+/* modal */
+.modal-header {
+  background-color: #f23a2e;
+  color: white;
+}
+
+
+.modal-header>button {
+  color: white;
+}
+
+.mymodal-dialog {
+  min-width: 280px;
+  max-width: 300px;
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+}
+
+a {
+  color: White !important;
+}
+
+.event-modal-dialog {
+  max-width: 90% !important;
+  width: 90% !important;
+  position: absolute;
+  top: 90px;
+  left: 5%;
+  bottom: 0;
+  z-index: 100000;
+}
+
+#even-modal-body {
+  max-height: 600px;
+  overflow: auto;
+}
+
+.mdl-tabs__tab-bar {
+  overflow: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .custom_navigation_span {
+    display: none;
+  }
+
+  .mdl-tabs__tab>.icon {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #first_tab_icon {
+    margin-left: 80px;
+  }
+
+}

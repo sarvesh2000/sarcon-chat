@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <!--css link-->
+
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="./css/chat.css" rel="stylesheet">
+    <!--icons 8-->
+    <a href="https://icons8.com/icon/473/online"></a>
+
+    <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Friendly Chat">
+  <meta name="theme-color" content="#303F9F">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Friendly Chat">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
+
+  <!-- Tile icon for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+  <meta name="msapplication-navbutton-color" content="#303F9F">
+
+  <!-- TODO: Enable First Input Delay polyfill library. -->
+  <script type="text/javascript">!function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);</script>
+</head>
+
+<body>
+    <!--NAV BAR-->
+    <nav class="navbar navbar-light bg-danger ">
+        <a class="navbar-brand text-white" href="#">
+            <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            TresCon
+        </a>
+        <div class="form-inline my-2 my-lg-0">
+            <img src="https://img.icons8.com/material-rounded/35/000000/name.png" />
+            <a class="text-white mr-4 ml-1" href="#">
+
+                Admin
+            </a>
+
+        </div>
+    </nav>
+
+    <!--CHAT BOX-->
+    <!-- py-4 px-3 -->
+    <div class="container-fluid ">
+
+
+        <div class="row rounded-lg overflow-hidden shadow">
+            <!-- Users box-->
+            <div class="col-md-5 px-0" id="left-box">
+                <div class="bg-white">
+
+                    <div class="recent px-4 py-2 bg-white">
+                        <p class="h5 mb-0 py-1">Joined Chatrooms</p>
+                    </div>
+
+                    <div class="messages-box">
+                        <div class="list-group rounded-0">
+                            <a class="list-group-item list-group-item-action active text-white rounded-0 list-1"
+                                onclick="showMessage()">
+                                <div class=" media"><img
+                                        src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+                                        alt="user" width="50" class="rounded-circle">
+                                    <div class="media-body ml-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">25
+                                                Dec</small>
+                                        </div>
+                                        <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet,
+                                            consectetur
+                                            adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                                <div class="media"><img
+                                        src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+                                        alt="user" width="50" class="rounded-circle">
+                                    <div class="media-body ml-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">14
+                                                Dec</small>
+                                        </div>
+                                        <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit
+                                            amet,
+                                            consectetur. incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Chat Box-->
+            <div class="col-md-7 px-0 " id="right-box">
+
+
+
+                <div class=" chat-box bg-white">
+                    <div class="recent px-4 py-2 bg-white">
+                        <div class=" media"><img
+                                src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+                                alt="user" width="50" class="rounded-circle">
+                            <div class="media-body ml-4">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <h6 class="mb-0">General Chat</h6><small class="small font-weight-bold"><img
+                                            src="https://img.icons8.com/color/30/000000/close-window.png"
+                                            class="mr-2 mt-1" id="close" onclick="closeMessage()" /></small>
+                                </div>
+                                <!-- <p class="font-italic mb-0 text-small">online</p> -->
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="px-4 py-5" id="messages">
+                        <!-- Sender Message-->
+                        <!--<div class="media w-50 mb-3" id="user-image"><img
+                                src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+                                alt="user" width="50" class="rounded-circle"> -->
+                            <!-- <div class="media-body ml-3"> -->
+                                <!-- <div class="bg-white rounded py-2 px-3 mb-2"> -->
+                                    <!-- <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p> -->
+                                <!-- </div> -->
+                                <!-- <p class="small text-muted">12:00 PM | Aug 13</p> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+
+                        <!-- Reciever Message-->
+                        <!-- <div class="media w-50 ml-auto mb-3">
+                            <div class="media-body">
+                                <div class="bg-danger rounded receiver py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-white">Test which is a new approach to have all
+                                        solutions
+                                    </p>
+                                </div>
+                                <p class="small text-muted">12:00 PM | Aug 13</p>
+                            </div>
+                        </div> -->
+
+
+
+
+                    </div>
+
+                </div>
+
+                <!-- Typing area -->
+                <form action="#" class="bg-white" id="message-form">
+                    <div class="input-group">
+                        <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
+                            class="form-control rounded-0 border-0 py-4 bg-white" id="message">
+                        <div class="input-group-append">
+                            <button id="button-addon2" disabled type="submit" class="btn btn-link "><img
+                                    src="https://img.icons8.com/material-sharp/24/000000/filled-sent.png" /></button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!--online or poll ares-->
+
+        </div>
+    </div>
+    </script>
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+        </script>
+
+    <!-- Firebase Scripts -->
+    <script src="/__/firebase/7.14.4/firebase-app.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-auth.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-storage.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-messaging.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-performance.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <!-- Scripts for Firebase Chat Functionality -->
+    <script src="js/main.js"></script>
+
+    <!-- Custom Scripts for Chat Responsiveness-->
+    <script>
+
+        // init the boxes on the mobile view
+        if ($(window).width() < 768) {
+            document.getElementById("left-box").style.display = "block"
+            document.getElementById("right-box").style.display = "none"
+        }
+        //resize left and right box for desktop view
+        $(window).resize(function () {
+            if ($(window).width() > 768) {
+                document.getElementById("left-box").style.display = "block"
+                document.getElementById("right-box").style.display = "block"
+            }
+
+        });
+        function showMessage() {
+            // on clicked
+            if ($(window).width() < 768) {
+                // execute only on mobile view || screen size is less thatn 768px
+                // basic toggle operation...
+                if (document.getElementById("left-box").style.display === "block") {
+                    document.getElementById("left-box").style.display = "none"
+                    document.getElementById("right-box").style.display = "block"
+                } else {
+                    document.getElementById("left-box").style.display = "block"
+                    document.getElementById("right-box").style.display = "none"
+                }
+            }
+        }
+        function closeMessage() {
+            // on clicked close button
+            if ($(window).width() < 768) {
+                // execute only on mobile view || screen size is less thatn 768px
+                // basic toggle operation...
+                if (document.getElementById("right-box").style.display === "block") {
+                    document.getElementById("left-box").style.display = "block"
+                    document.getElementById("right-box").style.display = "none"
+                } else {
+                    document.getElementById("left-box").style.display = "block"
+                    document.getElementById("right-box").style.display = "none"
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
