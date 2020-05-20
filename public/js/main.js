@@ -1,11 +1,95 @@
 'use strict';
 
-
 // Call the Polling function every 5 seconds
 window.setInterval(function(){
   /// call your function here
   polling(location.hash);
 }, 5000);
+
+// Call the listOnlineUsers function every 10 seconds
+window.setInterval(function(){
+  /// call your function here
+  listOnlineUsers(location.hash);
+}, 1000);
+
+// Get list of online users
+function listOnlineUsers(room_id){
+  // onlineUsersListElement.innerHTML ="";
+  // firebase.firestore().collection(room_id)
+  // .get()
+  // .then(function(querySnapshot){
+  //   console.log("Fetching Online Users...");
+  //   querySnapshot.forEach(function(doc){
+  //     console.log("User Data ",doc.data());
+  //     var element = createAndInsertOnlineUsers();
+  //     generateOnlineUsers(element,doc);
+  //   });
+  // });
+
+  var query = firebase.firestore().collection(room_id);
+      // Start listening to the query.
+      query.onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          console.log("Timestamp ",change.doc.data().timestamp.seconds);
+          var time = change.doc.data().timestamp.seconds * 1000;
+          if (change.type === 'removed' || Date.now() - time  > 300000) {
+            deleteOnlineUser(change.doc.id);
+          } else {
+           displayOnlineUsers(change.doc.id,change.doc);
+          }
+        });
+      });
+}
+
+// Delete a Message from the UI.
+function deleteOnlineUser(id) {
+  var div = document.getElementById(id);
+  // If an element for that message exists we delete it.
+  if (div) {
+    div.parentNode.removeChild(div);
+  }
+}
+
+var ONLINE_USER_TEMPLATE = 
+      '<a class="list-group-item list-group-item-action active text-white rounded-0">' +
+        '<div class="media">' +
+          '<img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">' +
+          '<div class="media-body ml-4">' +
+            '<div class="d-flex align-items-center justify-content-between mb-1">' +
+              '<h6 class="mb-0" id="username">Jason Doe</h6><small class="small font-weight-bold">' +
+                '<img src="https://img.icons8.com/metro/20/000000/online.png" />' +
+              '</small>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+
+      function createAndInsertOnlineUsers(id) {
+        const container = document.createElement('div');
+        container.innerHTML = ONLINE_USER_TEMPLATE;
+        const div = container.firstChild;
+        div.setAttribute('id',id)
+
+        // figure out where to insert new message
+        const existingMessages = onlineUsersListElement.children;
+        if (existingMessages.length === 0) {
+          onlineUsersListElement.appendChild(div);
+        } else {
+          let messageListNode = existingMessages[0];     
+          onlineUsersListElement.insertBefore(div, messageListNode);
+        }
+        return div;
+      }
+
+function generateOnlineUsers(div,doc){
+  var usernameElement = div.querySelector("#username");
+  usernameElement.innerHTML = doc.get("username");
+}
+
+function displayOnlineUsers(id,doc){
+  var div = document.getElementById(id) || createAndInsertOnlineUsers(id);
+  generateOnlineUsers(div,doc);
+}
 
 // Checks whether the user is online
 function isOnline(){
@@ -354,6 +438,7 @@ var messageFormElement = document.getElementById('message-type-box');
 var messageInputElement = document.getElementById('message-input');
 var submitButtonElement = document.getElementById('button-addon2');
 var userPicElement = document.getElementById('user-pic');
+var onlineUsersListElement = document.getElementById('online-users-list');
 
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
