@@ -1,5 +1,69 @@
 'use strict';
 
+// Checks whether the user is online
+function isOnline(){
+  console.log("Event.old ",event.oldURL);
+  console.log("Event.new ",event.newURL);
+  if(location.hash == ''){
+    console.log("User is new");
+    alert("Click a chat");
+  }else if(event.oldURL != event.newURL){
+    updateUserState(location.hash);
+    if(!localStorage.getItem('oldHash'))
+      localStorage.setItem('oldHash',location.hash);
+    else{
+      deleteUserState(localStorage.getItem('oldHash'));
+      localStorage.setItem('oldHash',location.hash);
+    }
+  }
+  else if(event == undefined){
+    updateUserState(location.hash);
+    console.log("Event is undefined");
+  }
+
+}
+
+function deleteUserState(room_id){
+  firebase.firestore().collection(room_id).where("user_id", "==", getUserId())
+  .get()
+  .then(function(querySnapshot){
+    console.log("Delete Item found");
+    querySnapshot.forEach(function(docu){
+      console.log(docu.id);
+      firebase.firestore().collection(room_id).doc(docu.id).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+    })
+  })
+}
+
+// Updates the state of the user in Firebase
+function updateUserState(room_id){
+  firebase.firestore().collection(room_id).where("user_id", "==", getUserId())
+  .get()
+  .then(function(querySnapshot){
+    console.log("User Found. Updating values");
+    console.log(doc.length);
+    querySnapshot.forEach(function(doc) {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+  })
+})
+.catch(function(error){
+  console.log("User Not found. Creating new value");
+  firebase.firestore().collection(room_id).add({
+    user_id: getUserId(),
+    username: getUserName(),
+    status: "active"
+  })
+  .catch(function(error){
+    console.log("Error in creating ",error);
+  });
+});
+}
+
 // Returns Signed In Username
 function getUserName(){
     //Change this to the username that is in Laravel
@@ -266,3 +330,9 @@ firebase.performance();
 
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
+
+isOnline();
+// Call the Online state check function every 5 seconds
+// window.setInterval(function(){
+//   /// call your function here
+// }, 5000);
