@@ -6,81 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
     <!--css link-->
-
+    <link href="./css/chat.css" rel="stylesheet">
     <!--bootstrap css-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link href="./css/chat.css" rel="stylesheet">
     <!--icons 8-->
     <a href="https://icons8.com/icon/473/online"></a>
-
-    <!-- Disable tap highlight on IE -->
-  <meta name="msapplication-tap-highlight" content="no">
-
-  <!-- Web Application Manifest -->
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Friendly Chat">
-  <meta name="theme-color" content="#303F9F">
-
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Friendly Chat">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
-
-  <!-- Tile icon for Win8 -->
-  <meta name="msapplication-TileColor" content="#3372DF">
-  <meta name="msapplication-navbutton-color" content="#303F9F">
-
-  <!-- TODO: Enable First Input Delay polyfill library. -->
-  <script type="text/javascript">!function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);</script>
 </head>
 
-<body onhashchange="isOnline(event)" onbeforeunload="myFunc()">
+<body onhashchange="isOnline(event)">
     <!--NAV BAR-->
-    <nav class="navbar navbar-light bg-danger ">
+    <nav class="navbar navbar-light  ">
         <a class="navbar-brand text-white" href="#">
             <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            TresCon
+            Big Cyber Security Show
         </a>
-        <div class="form-inline my-2 my-lg-0">
-            <img src="https://img.icons8.com/material-rounded/35/000000/name.png" />
-            <a class="text-white mr-4 ml-1" href="#">
 
-                Admin
-            </a>
-
-        </div>
     </nav>
 
-    <!--CHAT BOX-->
+    <!--CHAT SECTION-->
     <!-- py-4 px-3 -->
     <div class="container-fluid ">
-
-
-        <div class="row rounded-lg overflow-hidden shadow">
-            <!-- Users box-->
-            <div class="col-md-5 px-0" id="left-box">
-                <div class="bg-white">
-
-                    <div class="recent px-4 py-2 bg-white">
-                        <p class="h5 mb-0 py-1">Joined Chatrooms</p>
+        <div class="row  shadow">
+            <!-- section -1 :Users box  or left-box -->
+            <div class="col-lg-3 px-0" id="left-box">
+                <div>
+                    <div class="recent px-4 py-2 section1-border">
+                        <p class="h5 mb-0 py-1">Rooms</p>
                     </div>
-
                     <div class="messages-box">
                         <div class="list-group rounded-0">
+                            <!--first recipient-->
                             <a href="#id=1" class="list-group-item list-group-item-action active text-white rounded-0 list-1"
                                 onclick="showMessage()">
-                                <div class=" media"><img
-                                        src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-                                        alt="user" width="50" class="rounded-circle">
+                                <div class=" media">
+                                    <img src="https://img.icons8.com/material-rounded/45/000000/chat.png"
+                                        class="rounded-circle mt-3" />
+
                                     <div class="media-body ml-4">
                                         <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">25
-                                                Dec</small>
+                                            <h6 class="mb-0">Jason Doe</h6>
+                                            <!-- <small class="small font-weight-bold">25 Dec</small> -->
                                         </div>
                                         <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet,
                                             consectetur
@@ -88,15 +54,15 @@
                                     </div>
                                 </div>
                             </a>
-
-                            <a href="#id=2" onclick="showMessage()" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                <div class="media"><img
-                                        src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-                                        alt="user" width="50" class="rounded-circle">
+                            <!-- second recipient -->
+                            <a href="#id=2" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                                <div class="media">
+                                    <img src="https://img.icons8.com/material-rounded/45/000000/chat.png"
+                                        class="rounded-circle mt-3" />
                                     <div class="media-body ml-4">
                                         <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">14
-                                                Dec</small>
+                                            <h6 class="mb-0">Jason Doe</h6>
+                                            <!-- <small class="small font-weight-bold">14  Dec</small> -->
                                         </div>
                                         <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit
                                             amet,
@@ -104,83 +70,142 @@
                                     </div>
                                 </div>
                             </a>
-
-
-
+                            <!--third recipient-->
+                            <!--modal opens for plogin-->
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0"
+                                id="login" data-target="#LoginModal" data-toggle="modal">
+                                <div class="media">
+                                    <img src="https://img.icons8.com/material-rounded/45/000000/chat.png"
+                                        class="rounded-circle mt-3" />
+                                    <div class="media-body ml-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <h6 class="mb-0">Jason Doe</h6>
+                                            <!-- <small class="small font-weight-bold">14  Dec</small> -->
+                                        </div>
+                                        <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit
+                                            amet,
+                                            consectetur. incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Chat Box-->
-            <div class="col-md-7 px-0 " id="right-box">
+
+            <!-- secction 2 : Chat Box or middle box-->
+            <div class="col-lg-6 px-0 " id="middle-box">
+                <div class=" chat-box">
+                    <div class="recent px-4 py-2 ">
+                        <div class=" media">
+                            <img src="https://img.icons8.com/color/48/000000/chat.png" class="rounded-circle" />
 
 
-
-                <div class=" chat-box bg-white">
-                    <div class="recent px-4 py-2 bg-white">
-                        <div class=" media"><img
-                                src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-                                alt="user" width="50" class="rounded-circle">
-                            <div class="media-body ml-4">
+                            <div class="media-body ml-2">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <h6 class="mb-0">General Chat</h6><small class="small font-weight-bold"><img
-                                            src="https://img.icons8.com/color/30/000000/close-window.png"
-                                            class="mr-2 mt-1" id="close" onclick="closeMessage()" /></small>
-                                </div>
-                                <!-- <p class="font-italic mb-0 text-small">online</p> -->
+                                    <h6 class="pt-3 mb-2">Jason Doe</h6><small class="small font-weight-bold">
 
+                                        <button type="button" class="btn btn-info " id="online"
+                                            onclick="online()">Online
+                                            Users</button>
+
+                                        <img src="https://img.icons8.com/color/30/000000/close-window.png"
+                                            class=" ml-4 mr-2 " id="close" onclick="closeMessage()" /></small>
+                                </div>
+                                <!-- <p class="font-italic mb-0 mt-0 text-small">online</p> -->
                             </div>
                         </div>
-
                     </div>
-
-                    <div class="px-4 py-5" id="messages">
-                        <!-- Sender Message-->
-                        <!--<div class="media w-50 mb-3" id="user-image"><img
-                                src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-                                alt="user" width="50" class="rounded-circle"> -->
-                            <!-- <div class="media-body ml-3"> -->
-                                <!-- <div class="bg-white rounded py-2 px-3 mb-2"> -->
-                                    <!-- <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p> -->
-                                <!-- </div> -->
-                                <!-- <p class="small text-muted">12:00 PM | Aug 13</p> -->
-                            <!-- </div> -->
-                        <!-- </div> -->
-
-                        <!-- Reciever Message-->
-                        <!-- <div class="media w-50 ml-auto mb-3">
-                            <div class="media-body">
-                                <div class="bg-danger rounded receiver py-2 px-3 mb-2">
-                                    <p class="text-small mb-0 text-white">Test which is a new approach to have all
-                                        solutions
-                                    </p>
-                                </div>
-                                <p class="small text-muted">12:00 PM | Aug 13</p>
-                            </div>
-                        </div> -->
-
-
-
-
+                    <div class="px-4 py-5" id="list-messages">
                     </div>
-
                 </div>
-
                 <!-- Typing area -->
-                <form action="#" class="bg-white" id="message-form">
+                <form action="#" class="bg-white" id="message-type-box">
                     <div class="input-group">
                         <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
-                            class="form-control rounded-0 border-0 py-4 bg-white" id="message">
+                            class="form-control rounded-0 border-0 py-4 bg-white" id="message-input">
                         <div class="input-group-append">
                             <button id="button-addon2" disabled type="submit" class="btn btn-link "><img
                                     src="https://img.icons8.com/material-sharp/24/000000/filled-sent.png" /></button>
                         </div>
                     </div>
                 </form>
-
             </div>
-            <!--online or poll ares-->
+            
+            <!--section 3: online or poll area or right-box-->
+            <div class="col-lg-3 px-0 " id="right-box">
+                <div class="bg-white">
 
+                    <div class="recent px-4 py-2 " id="section3">
+                        <!--online-->
+                        <p class="h5 mb-0 py-1"> <img src="https://img.icons8.com/flat_round/25/000000/back--v1.png"
+                                class="ml-0 mr-2 " id="online-close" onclick="arrowClose()" />
+                            Online</p>
+                    </div>
+                    <!--online users list-->
+                    <div class="messages-box">
+                        <div class="list-group rounded-0">
+                            <a class="list-group-item list-group-item-action active text-white rounded-0">
+                                <div class="media"><img
+                                        src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+                                        alt="user" width="50" class="rounded-circle">
+                                    <div class="media-body ml-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">
+                                                <img src="https://img.icons8.com/metro/20/000000/online.png" />
+                                            </small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                                <div class="media"><img
+                                        src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+                                        alt="user" width="50" class="rounded-circle">
+                                    <div class="media-body ml-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">
+                                                <img src="https://img.icons8.com/metro/20/000000/online.png" />
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--poll area end-->
+        </div>
+    </div>
+
+    <!--Login  Modal -->
+    <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" id="password">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info">Login</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
         </div>
     </div>
     </script>
@@ -206,50 +231,82 @@
 
     <!-- Scripts for Firebase Chat Functionality -->
     <script src="js/main.js"></script>
-
-    <!-- Custom Scripts for Chat Responsiveness-->
     <script>
 
-        // init the boxes on the mobile view
-        if ($(window).width() < 768) {
+        // init the boxes on the mobile and tablet view
+        if ($(window).width() <= 992) {
             document.getElementById("left-box").style.display = "block"
+            document.getElementById("middle-box").style.display = "none"
             document.getElementById("right-box").style.display = "none"
         }
         //resize left and right box for desktop view
         $(window).resize(function () {
-            if ($(window).width() > 768) {
+            if ($(window).width() >= 992) {
                 document.getElementById("left-box").style.display = "block"
+                document.getElementById("middle-box").style.display = "block"
                 document.getElementById("right-box").style.display = "block"
+            }
+            else {
+                document.getElementById("middle-box").style.display = "none"
+                document.getElementById("right-box").style.display = "none"
             }
 
         });
         function showMessage() {
             // on clicked
-            if ($(window).width() < 768) {
-                // execute only on mobile view || screen size is less thatn 768px
+            if ($(window).width() <= 992) {
+                // execute only on mobile  and tabview || screen size is less thatn 768px
                 // basic toggle operation...
                 if (document.getElementById("left-box").style.display === "block") {
                     document.getElementById("left-box").style.display = "none"
-                    document.getElementById("right-box").style.display = "block"
+                    document.getElementById("middle-box").style.display = "block"
+                    document.getElementById("right-box").style.display = "none"
                 } else {
                     document.getElementById("left-box").style.display = "block"
+                    document.getElementById("middle-box").style.display = "none"
+                }
+            }
+        }
+        // chat close btn
+        function closeMessage() {
+            // on clicked close button
+            if ($(window).width() <= 992) {
+                // execute only on mobile and tab view || screen size is less thatn 992px
+                // basic toggle operation...
+                if (document.getElementById("middle-box").style.display === "block") {
+                    document.getElementById("left-box").style.display = "block"
+                    document.getElementById("middle-box").style.display = "none"
+                }
+            }
+        }
+        //online user close btn
+        function arrowClose() {
+            // on clicked close button
+            if ($(window).width() <= 992) {
+                // execute only on mobile and tab view || screen size is less thatn 992px
+                // basic toggle operation...
+                if (document.getElementById("right-box").style.display === "block") {
+                    document.getElementById("middle-box").style.display = "block"
+                    document.getElementById("left-box").style.display = "none"
                     document.getElementById("right-box").style.display = "none"
                 }
             }
         }
-        function closeMessage() {
-            // on clicked close button
-            if ($(window).width() < 768) {
-                // execute only on mobile view || screen size is less thatn 768px
+        //online icon
+        function online() {
+            if ($(window).width() <= 992) {
+                // execute only on mobile and tab view || screen size is less thatn 992px
                 // basic toggle operation...
-                if (document.getElementById("right-box").style.display === "block") {
-                    document.getElementById("left-box").style.display = "block"
-                    document.getElementById("right-box").style.display = "none"
-                } else {
-                    document.getElementById("left-box").style.display = "block"
-                    document.getElementById("right-box").style.display = "none"
+
+                if (document.getElementById("middle-box").style.display === "block") {
+                    document.getElementById("right-box").style.display = "block"
+                    document.getElementById("middle-box").style.display = "none"
+                    document.getElementById("left-box").style.display = "none"
+
                 }
+
             }
+
         }
 
     </script>

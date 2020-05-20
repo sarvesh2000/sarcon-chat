@@ -201,17 +201,21 @@ function onMessageFormSubmit(e) {
 var MESSAGE_TEMPLATE =
     '<div class="media w-50 ml-auto mb-3">' +
       '<div class="media-body">' +
-      '<div class="bg-danger rounded receiver py-2 px-3 mb-2">' +
-      '<p class="text-small mb-0 text-white message"></p></div><p class="small text-muted time"></p>' +
-    '</div>';
+        '<div class="bg-danger rounded receiver py-2 px-3 mb-2">' +
+          '<p class="text-small mb-0 text-white text_message"></p></div><p class="small text-muted time"></p>' +
+    '</div></div>';
 
 // Receiver Message Template
 var MESSAGE_TEMPLATE2 = 
     '<div class="media w-50 mb-3">' +
       '<img src="" alt="user" width="50" class="rounded-circle pic">' +
       '<div class="media-body ml-3">' +
+        '<div class="chat-username rounded mb-2">'+
+          '<p class="text-small mb-0 text-white user_name"></p>' +  //Added class user_name for displaying name of sender
+        '</div>' +
         '<div class="bg-white rounded py-2 px-3 mb-2">' +
-          '<p class="text-small mb-0 text-muted message"></p></div><p class="small text-muted time"></p>' +
+          '<p class="text-small mb-0 text-muted text_message"></p></div><p class="small text-muted time"></p>' +  //Added class text_message for displaying the message
+      '</div>' +
     '</div>';
 
 // A loading image URL.
@@ -278,10 +282,13 @@ function generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div){
   }
 
   // div.querySelector('.name').textContent = name;
-    var messageElement = div.querySelector('.message');
+    var messageElement = div.querySelector('.text_message');
     var timeElement = div.querySelector('.time');
+    var usernameElement = div.querySelector('.chat-username');
   
     if (text) { // If the message is text.
+      if(usernameElement)
+        usernameElement.textContent = name;
       messageElement.textContent = text;
       // Replace all line breaks by <br>.
       messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
@@ -342,9 +349,9 @@ function generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div){
   checkSetup();
 
 // Shortcuts to DOM Elements.
-var messageListElement = document.getElementById('messages');
-var messageFormElement = document.getElementById('message-form');
-var messageInputElement = document.getElementById('message');
+var messageListElement = document.getElementById('list-messages');
+var messageFormElement = document.getElementById('message-type-box');
+var messageInputElement = document.getElementById('message-input');
 var submitButtonElement = document.getElementById('button-addon2');
 var userPicElement = document.getElementById('user-pic');
 
