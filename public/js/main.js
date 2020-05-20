@@ -1,5 +1,12 @@
 'use strict';
 
+
+// Call the Polling function every 5 seconds
+window.setInterval(function(){
+  /// call your function here
+  polling(location.hash);
+}, 5000);
+
 // Checks whether the user is online
 function isOnline(){
   if(location.hash == ''){
@@ -21,6 +28,32 @@ function isOnline(){
 
 }
 
+function polling(room_id){
+  firebase.firestore().collection(room_id).where("user_id", "==", getUserId())
+  .get()
+  .then(function(querySnapshot){
+    console.log("User Found... Now Polling");
+    querySnapshot.forEach(function(doc){
+      console.log("Doc ID ",doc.id);
+      console.log("Doc Data ",doc.data());
+      firebase.firestore().collection(room_id).doc(doc.id).update({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .then(function(){
+        console.log("Polling Update Successful");
+      })
+      .catch(function(error){
+        console.log("Polling  Update Error ", error);
+      });
+    })
+  })
+  .catch(function(error){
+    console.log("Polling Error. User not found ", error);
+  });
+}
+
+
+// Delets the user online state from firebase
 function deleteUserState(room_id){
   firebase.firestore().collection(room_id).where("user_id", "==", getUserId())
   .get()
@@ -54,7 +87,8 @@ function updateUserState(room_id){
   firebase.firestore().collection(room_id).add({
     user_id: getUserId(),
     username: getUserName(),
-    status: "active"
+    status: "active",
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
   })
   .catch(function(error){
     console.log("Error in creating ",error);
@@ -276,6 +310,7 @@ function generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div){
   function displayMessage(id, timestamp, name, user_id, text, picUrl, imageUrl) {
     if(user_id == getUserId()){
     var div = document.getElementById(id) || createAndInsertMessage(id, timestamp);
+    console.log("Timestamp Display ",timestamp);
     generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div);
     }else{
       var div = document.getElementById(id) || createAndInsertMessage(id, timestamp, 1);
@@ -330,7 +365,3 @@ firebase.performance();
 loadMessages();
 
 isOnline();
-// Call the Online state check function every 5 seconds
-// window.setInterval(function(){
-//   /// call your function here
-// }, 5000);
