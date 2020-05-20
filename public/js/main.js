@@ -2,8 +2,6 @@
 
 // Checks whether the user is online
 function isOnline(){
-  console.log("Event.old ",event.oldURL);
-  console.log("Event.new ",event.newURL);
   if(location.hash == ''){
     console.log("User is new");
     alert("Click a chat");
