@@ -1,36 +1,68 @@
 'use strict';
 
+// Get Collections in DB
+function getCollections(){
+  $.ajax({url: "https://us-central1-sarcon-chat.cloudfunctions.net/dblist", 
+    success: function(result){
+      console.log(result);
+      afterCollections(result);
+  },
+  error: function(error){
+    console.log("DB Fetch Error ",error);
+  }
+});
+}
+
+function afterCollections(result){
+  var collection = [];
+      for(var i = 0 ; i< result.length; i++){
+        collection.push(result[i]);
+        console.log("Pushing ",result[i]);
+      }
+      var res = checkIfUser(collection);
+      for(i in res)
+        console.log("After Filter ",res);
+}
+
+// Call the Polling function every 5 seconds
+window.setInterval(function(){
+  /// call your function here
+  getCollections();
+}, 30000);
+
 // Call the Polling function every 5 seconds
 window.setInterval(function(){
   /// call your function here
   polling(location.hash);
-}, 5000);
+}, 30000);
 
 // Call the listOnlineUsers function every 10 seconds
 window.setInterval(function(){
   /// call your function here
   listOnlineUsers(location.hash);
-}, 1000);
+}, 30000);
+
+function checkCol(collect) {
+  if(collect.includes("messagesZeZ")) {
+    var colStrip = collect.replace('messagesZeZ','');
+    var colSplit = colStrip.split("X");
+    if(colSplit[0]=='4329' || colSplit[1]=='4329')
+        return true;
+  }
+  return false;
+}
+
+function checkIfUser(colNames) {
+    return colNames.filter(checkCol);
+}
 
 // Get list of online users
 function listOnlineUsers(room_id){
-  // onlineUsersListElement.innerHTML ="";
-  // firebase.firestore().collection(room_id)
-  // .get()
-  // .then(function(querySnapshot){
-  //   console.log("Fetching Online Users...");
-  //   querySnapshot.forEach(function(doc){
-  //     console.log("User Data ",doc.data());
-  //     var element = createAndInsertOnlineUsers();
-  //     generateOnlineUsers(element,doc);
-  //   });
-  // });
-
   var query = firebase.firestore().collection(room_id);
       // Start listening to the query.
       query.onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
-          console.log("Timestamp ",change.doc.data().timestamp.seconds);
+          // console.log("Timestamp ",change.doc.data().timestamp.seconds);
           var time = change.doc.data().timestamp.seconds * 1000;
           if (change.type === 'removed' || Date.now() - time  > 300000) {
             deleteOnlineUser(change.doc.id);
@@ -118,8 +150,8 @@ function polling(room_id){
   .then(function(querySnapshot){
     console.log("User Found... Now Polling");
     querySnapshot.forEach(function(doc){
-      console.log("Doc ID ",doc.id);
-      console.log("Doc Data ",doc.data());
+      // console.log("Doc ID ",doc.id);
+      // console.log("Doc Data ",doc.data());
       firebase.firestore().collection(room_id).doc(doc.id).update({
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
@@ -452,6 +484,9 @@ messageInputElement.addEventListener('change', toggleButton);
 
 // TODO: Enable Firebase Performance Monitoring.
 firebase.performance();
+
+// Get List of collections in DB
+getCollections();
 
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
