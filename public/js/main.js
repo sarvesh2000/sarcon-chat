@@ -557,6 +557,37 @@ function generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div){
     }
   }
   
+
+  // Saves the messaging device token to the datastore.
+function saveMessagingDeviceToken() {
+  // TODO 10: Save the device token in the realtime datastore
+  firebase.messaging().getToken().then(function(currentToken) {
+    if (currentToken) {
+      console.log('Got FCM device token:', currentToken);
+      // Saving the Device Token to the datastore.
+      firebase.firestore().collection('fcmTokens').doc(currentToken)
+          .set({uid: firebase.auth().currentUser.uid});
+    } else {
+      // Need to request permissions to show notifications.
+      requestNotificationsPermissions();
+    }
+  }).catch(function(error){
+    console.error('Unable to get messaging token.', error);
+  });
+}
+
+// Requests permissions to show notifications.
+function requestNotificationsPermissions() {
+  // TODO 11: Request permissions to send notifications.
+  console.log('Requesting notifications permission...');
+  firebase.messaging().requestPermission().then(function() {
+    // Notification permission granted.
+    saveMessagingDeviceToken();
+  }).catch(function(error) {
+    console.error('Unable to get permission to notify.', error);
+  });
+}
+
   // Checks that the Firebase SDK has been correctly setup and configured.
   function checkSetup() {
     if (!window.firebase || !(firebase.app instanceof Function) || !firebase.app().options) {
@@ -587,6 +618,9 @@ messageInputElement.addEventListener('change', toggleButton);
 
 // initialize Firebase
 // initFirebaseAuth();
+
+// We save the Firebase Messaging Device token and enable notifications.
+saveMessagingDeviceToken();
 
 // TODO: Enable Firebase Performance Monitoring.
 firebase.performance();
