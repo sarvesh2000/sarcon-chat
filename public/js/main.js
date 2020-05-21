@@ -1,5 +1,4 @@
 'use strict';
-
 // Get Collections in DB
 function getCollections(){
   $.ajax({url: "https://us-central1-sarcon-chat.cloudfunctions.net/dblist", 
@@ -47,7 +46,7 @@ function afterCollections(result){
   //   filteredCollection.forEach(function (col){
   //     listDM(col,otherUser);
   //  });
-  
+
 }
 
 var DM_TEMPLATE =
