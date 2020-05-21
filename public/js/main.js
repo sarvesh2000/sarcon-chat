@@ -15,13 +15,88 @@ function getCollections(){
 
 function afterCollections(result){
   var collection = [];
-      for(var i = 0 ; i< result.length; i++){
-        collection.push(result[i]);
-        console.log("Pushing ",result[i]);
-      }
-      var res = checkIfUser(collection);
-      for(i in res)
-        console.log("After Filter ",res);
+  var filteredCollection = [];
+  var currentUser =  [];
+  var otherUser = [];
+
+  for(var i = 0 ; i< Object.keys(result).length; i++){
+    console.log("Pushing ",result[i]);
+    collection.push(result[i]);
+  }
+  var res = collection;
+  res.forEach(function(key){
+    if(checkCol(key)){
+      console.log("After Filter", key);
+      filteredCollection.push(key);
+    }
+  });
+  filteredCollection.forEach(function(key){
+    console.log("Filtered Collection ",key);
+    currentUser.push(getUseridField(key));
+    otherUser.push(getUsernameField(key));
+  });
+  if(currentUser.length == otherUser.length){
+    for(var i = 0; i<currentUser.length; i++){
+      console.log("Value in currentUser ",currentUser[i]);
+      console.log("Value in otherUser ",otherUser[i]);
+    }
+  }
+  if(filteredCollection.length == otherUser.length)
+    for(var i = 0; i<filteredCollection.length; i++)
+      listDM(filteredCollection[i],otherUser[i]);
+  //   filteredCollection.forEach(function (col){
+  //     listDM(col,otherUser);
+  //  });
+  
+}
+
+var DM_TEMPLATE =
+    '<a href="#id=1" class="list-group-item list-group-item-action active text-white rounded-0 list-1" onclick="showMessage()">' +
+      '<div class=" media">' +
+        '<img src="https://img.icons8.com/material-rounded/45/000000/chat.png" class="rounded-circle mt-3" />' +
+        '<div class="media-body ml-4">' +
+          '<div class="d-flex align-items-center justify-content-between mb-1">' +
+            '<h6 class="mb-0" id="user-name"></h6>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</a>';
+
+// Function to create DM Chats
+function createAndInsertDM(id,timestamp){
+  const container = document.createElement('div');
+  container.innerHTML = DM_TEMPLATE;
+  const div = container.firstChild;
+  div.setAttribute('id', id);
+    // figure out where to insert new message
+    const existingMessages = DMChatsListElement.children;
+    if (existingMessages.length === 0) {
+      DMChatsListElement.appendChild(div);
+    } else {
+      let messageListNode = existingMessages[0];
+  
+      DMChatsListElement.insertBefore(div, messageListNode);
+    }
+  
+    return div;
+}
+
+// Delete a DM from the UI.
+function deleteDM(id) {
+  var div = document.getElementById(id);
+  // If an element for that message exists we delete it.
+  if (div) {
+    div.parentNode.removeChild(div);
+  }
+}
+
+// Get list of DM
+function listDM(col,otherUser){
+  firebase.firestore().collection(col)
+  .get()
+  .then(function(doc){
+    displayDM(doc.id,otherUser);
+  });
 }
 
 // Call the Polling function every 5 seconds
@@ -30,7 +105,7 @@ window.setInterval(function(){
   getCollections();
 }, 30000);
 
-// Call the Polling function every 5 seconds
+// Call the Polling function every 5 seconds 
 window.setInterval(function(){
   /// call your function here
   polling(location.hash);
@@ -42,18 +117,39 @@ window.setInterval(function(){
   listOnlineUsers(location.hash);
 }, 30000);
 
+// Filter only DM chats
 function checkCol(collect) {
   if(collect.includes("messagesZeZ")) {
     var colStrip = collect.replace('messagesZeZ','');
-    var colSplit = colStrip.split("X");
+    var usernameRemoved = colStrip.split('$')[0];
+    var colSplit = colStrip.split("x");
     if(colSplit[0]=='4329' || colSplit[1]=='4329')
         return true;
   }
   return false;
 }
 
-function checkIfUser(colNames) {
-    return colNames.filter(checkCol);
+// Get other User Name
+function getUsernameField(collect) {
+  var currentUser = 'Kumar';
+  var colStrip = collect.replace('messagesZeZ','');
+  var usernameRemoved = colStrip.split('$');
+  if(usernameRemoved[1]== currentUser)
+      return usernameRemoved[2];
+  else
+      return usernameRemoved[1];
+}
+
+// Split User ID of current user 
+function getUseridField(collect) {
+  var currentId = '4313';
+  var colStrip = collect.replace('messagesZeZ','');
+  var usernameRemoved = colStrip.split('$')[0];
+  var colSplit = usernameRemoved.split("x");
+  if(colSplit[0]==currentId)
+      return colSplit[1];
+  else
+      return colSplit[0];
 }
 
 // Get list of online users
@@ -71,6 +167,16 @@ function listOnlineUsers(room_id){
           }
         });
       });
+}
+
+function generateDM(div,otherUser){
+  var usernameElement = div.querySelector("#user-name");
+  usernameElement.innerHTML = otherUser;
+}
+
+function displayDM(id,otherUser){
+  var div = document.getElementById(id) || createAndInsertDM(id);
+  generateDM(div,otherUser);
 }
 
 // Delete a Message from the UI.
@@ -471,6 +577,7 @@ var messageInputElement = document.getElementById('message-input');
 var submitButtonElement = document.getElementById('button-addon2');
 var userPicElement = document.getElementById('user-pic');
 var onlineUsersListElement = document.getElementById('online-users-list');
+var DMChatsListElement = document.getElementById('dm-chats-list');
 
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);

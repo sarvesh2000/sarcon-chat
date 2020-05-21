@@ -23,11 +23,6 @@ exports.dblist = functions.https.onRequest((request, response) =>{
           console.log(`Found collection with id: ${collection.id}`);
           collect.push(collection.id);
         }
-    //     let obj = {} ;
-    // for (var key in collect) {
-    //     obj[key] = collect[key];
-    // }
-    // response.send(obj);
     response.send(Object.assign({}, collect));
     return "Success";
     })
