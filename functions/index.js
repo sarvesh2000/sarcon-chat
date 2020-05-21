@@ -23,6 +23,11 @@ exports.dblist = functions.https.onRequest((request, response) =>{
           console.log(`Found collection with id: ${collection.id}`);
           collect.push(collection.id);
         }
+        response.set('Cache-Control','public, max-age=300, s-maxage=600');
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.header("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
+        response.header("Access-Control-Max-Age", "3600");
+        response.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     response.send(Object.assign({}, collect));
     return "Success";
     })
