@@ -494,6 +494,34 @@ function createAndInsertMessage(id, timestamp,flag = 0) {
     return div;
   }
   
+  function monthInWords(month){
+    console.log(typeof(month));
+    if(month == 1)
+      return "Jan";
+    if(month == 2)
+      return "Feb";
+    if(month == 3)
+      return "Mar";
+    if(month == 4)
+      return "Apr";
+    if(month == 5)
+      return "May";
+    if(month == 6)
+      return "Jun";
+    if(month == 7)
+      return "Jul";
+    if(month == 8)
+      return "Aug";
+    if(month == 9)
+      return "Sep";
+    if(month == 10)
+      return "Oct";
+    if(month == 11)
+      return "Nov";
+    if(month == 12)
+      return "Dec";
+  }
+  
 function generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div){
   // profile picture
   if (picUrl) {
@@ -501,7 +529,6 @@ function generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div){
     if(div.querySelector('.pic'))
       div.querySelector('.pic').src = picUrl;
   }
-
   // div.querySelector('.name').textContent = name;
     var messageElement = div.querySelector('.text_message');
     var timeElement = div.querySelector('.time');
@@ -517,7 +544,8 @@ function generate(id, timestamp, name, user_id, text, picUrl, imageUrl, div){
       var date = new Date(timestamp.seconds*1000);
       var hours = date.getHours();
       var minutes = date.getMinutes();
-      timeElement.innerHTML = date.getDate() + " " + date.getMonth() + " " + date.getFullYear() + " | " + hours + " : " + minutes;
+      // date.getMonth()
+      timeElement.innerHTML = date.getDate() + " " + monthInWords(date.getMonth()) + " " + date.getFullYear() + " | " + hours + " : " + minutes;
     } else if (imageUrl) { // If the message is an image.
       var image = document.createElement('img');
       image.addEventListener('load', function() {

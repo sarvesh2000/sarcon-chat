@@ -635,11 +635,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-
+            <div class="modal-body" id="notify">
                 <p>Modal body text goes here.</p>
-
-
             </div>
 
         </div>
@@ -683,6 +680,18 @@
         $('#eventmodal').animate({ scrollTop: $('#eventmodal .modal-content').height() }, 'slow');
 
     </script>
+
+    <!-- Firebase Scripts -->
+    <script src="/__/firebase/7.14.4/firebase-app.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-auth.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-storage.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-messaging.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.14.4/firebase-performance.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <!-- Scripts for Firebase Chat Functionality -->
+    <script src="js/index.js"></script>
 
 
 </body>
